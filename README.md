@@ -211,7 +211,7 @@ Unfortunately, I found trouble.
 ```
 cd client
 
-npm install @protobuf-ts/plugin
+npm install @protobuf-ts/plugin @protobuf-ts/grpcweb-transport
 
 npx protoc --ts_out ./src/proto/protobuf-ts --proto_path ../proto ../proto/echo.proto
 ```
