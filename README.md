@@ -4,6 +4,40 @@ A simplist demo to show the issue when using vite with grpc-web generated code.
 
 Btw, don't need the server and proxy to run to see the error in the web service. Need server and proxy when web service is running the test the grpc service itself.
 
+## UPDATE: 2022-07-04 Demo is working!
+
+### Quick Launch
+
+- server
+
+```
+cd server
+
+npm install
+
+node echo_server.js
+```
+
+- envoy proxy
+
+```
+# ubuntu
+docker build -t yg-envoy-grpc -f Dockerfile .
+docker run --rm -it -p 9090:9090 -p 9901:9901 --network=host yg-envoy-grpc
+```
+
+- client
+
+```
+cd client
+
+npm install
+
+npm run dev
+```
+
+Move to web browser to see the demo.
+
 ## Quick Start
 
 ### Env
@@ -188,7 +222,7 @@ import { EchoRequest } from './proto/protobuf-ts/echo'
 import { EchoServiceClient } from './proto/protobuf-ts/echo.client'
 
 const client = new EchoServiceClient('http://127.0.0.1:9090')
-const request = EchoRequest
+const request = EchoRequest.fromJson({"query": "Hello Vite!"})
 ```
 
 Error:
